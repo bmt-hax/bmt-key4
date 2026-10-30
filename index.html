@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Unlocked</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #09060f;
+            color: #f2eefa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .sub-title {
+            color: #9a90b0;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: #130e1c;
+            border: 1px solid #2c2340;
+            border-radius: 20px;
+            padding: 30px 20px;
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.18); /* Soft Purple Glow */
+        }
+
+        .status {
+            color: #d8b4fe; /* Light Purple Title */
+            letter-spacing: 2px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .instruction {
+            color: #9a90b0;
+            font-size: 0.85rem;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+
+        .key-box {
+            border: 2px dashed #7c3aed; /* Purple Border */
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 1.1rem;
+            color: #f2eefa; /* Key Text */
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+            background-color: #0e0a16;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            width: 100%;
+            background-color: #a855f7;
+            color: #0a0610;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background-color: #9333ea;
+        }
+
+        .footer {
+            margin-top: 40px;
+            color: #625878;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Top Section -->
+        <h1>Access Unlocked</h1>
+        <p class="sub-title">Your personalized panel license is now active on this device. Key details are below.</p>
+
+        <!-- Main Card -->
+        <div class="card">
+            <div class="status">LICENSE CONFIRMED!</div>
+            <!-- Aapka Custom Text -->
+            <p class="instruction">​License Key Generated Successfully! Tap below to copy your access key.
+!</p>
+            
+            <!-- Key Display -->
+            <div class="key-box" id="licenseKey">LOADING-KEY...</div>
+            
+            <!-- Copy Button -->
+            <button class="copy-btn" id="copyBtn" onclick="copyKey()">Copy to Clipboard</button>
+        </div>
+
+        <!-- Aapka Channel Name -->
+        <div class="footer">BMT H4X</div>
+    </div>
+
+    <script>
+        // URL se "key" value nikalne ka logic
+        const urlParams = new URLSearchParams(window.location.search);
+        let key = urlParams.get('key');
+
+        // Agar URL me key nahi milti toh Aapki Custom Key dikhegi
+        if (!key) {
+            key = "ITC-PN6-WI5"; 
+        }
+
+        // Key ko screen par dikhana
+        document.getElementById('licenseKey').innerText = key;
+
+        // Copy to Clipboard Function
+        function copyKey() {
+            const keyText = document.getElementById('licenseKey').innerText;
+            const button = document.getElementById('copyBtn');
+
+            navigator.clipboard.writeText(keyText).then(() => {
+                // Copy hone ke baad button dark grey ho jayega
+                button.innerText = "Copied!";
+                button.style.backgroundColor = "#2c2340";
+                button.style.color = "#ffffff";
+                
+                setTimeout(() => {
+                    button.innerText = "Copy to Clipboard";
+                    button.style.backgroundColor = "#a855f7";
+                    button.style.color = "#0a0610";
+                }, 2000);
+            }).catch(err => {
+                alert("Failed to copy text: ", err);
+            });
+        }
+    </script>
+
+</body>
+</html>
